@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:learning_demo/navigator/navigator_first.dart';
-import 'package:learning_demo/navigator/navigator_second.dart';
-import 'package:learning_demo/navigator/navigator_third.dart';
+import 'package:learning_demo/pages/navigator/navigator_people.dart';
+import 'package:learning_demo/pages/navigator/navigator_second.dart';
+import 'package:learning_demo/pages/navigator/navigator_third.dart';
 
 void main() {
   runApp(const MyAppNavigator());
@@ -16,7 +16,7 @@ class MyAppNavigator extends StatefulWidget {
 class _NavigatorState extends State<MyAppNavigator> {
   int currentPageIndex = 0;
   final screens = [
-    FirstPage(),
+    PeoplePage(),
     SecondPage(),
     ThirdPage()
   ];

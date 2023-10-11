@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:learning_demo/RestClient.dart';
-import 'package:learning_demo/recyclerItems/personItem.dart';
+import 'package:learning_demo/rest_client.dart';
+import 'package:learning_demo/recyclerItems/person_item.dart';
 
-import '../models/person.dart';
+import '../../models/person.dart';
 
-class FirstPage extends StatefulWidget {
-  const FirstPage({super.key});
+class PeoplePage extends StatefulWidget {
+  const PeoplePage({super.key});
 
   @override
-  State<FirstPage> createState() => _FirstPageState();
+  State<PeoplePage> createState() => _PeoplePageState();
 }
 
-class _FirstPageState extends State<FirstPage> {
+class _PeoplePageState extends State<PeoplePage> {
   bool _loading = false;
   List<Person> _people = [];
 
