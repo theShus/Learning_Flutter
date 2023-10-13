@@ -1,7 +1,6 @@
 //https://randomuser.me/documentation#format
 
-class Person{
-
+class Person {
   late String name;
   late String last;
   late String gender;
@@ -16,13 +15,14 @@ class Person{
   //The get keyword is used to define a getter called isMinor. This getter computes a boolean value based on a condition:
   // bool get isMinor => age < 18;
 
-  bool isMinor(){
-    if(age < 18) return true;
+  bool isMinor() {
+    if (age < 18) return true;
     return false;
   }
 
   //https://randomuser.me/
-  Person.fromJson(Map json){//created a custom constructor
+  Person.fromJson(Map json) {
+    //created a custom constructor
     this.name = json["name"]["first"];
     this.last = json["name"]["last"];
     this.gender = json["gender"];
@@ -37,5 +37,4 @@ class Person{
     this.phone = json["phone"];
     this.imageUrl = json["picture"]["large"];
   }
-
 }

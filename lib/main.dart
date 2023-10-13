@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learning_demo/pages/navigator/navigator_people.dart';
 import 'package:learning_demo/pages/navigator/navigator_people_bloc.dart';
-import 'package:learning_demo/pages/navigator/navigator_third.dart';
+import 'package:learning_demo/pages/navigator/navigator_tasks.dart';
 
 void main() {
   runApp(const MyAppNavigator());
@@ -17,8 +17,8 @@ class _NavigatorState extends State<MyAppNavigator> {
   int currentPageIndex = 0;
   final screens = [
     PeoplePage(),
-    SecondPage(),
-    ThirdPage()
+    SecondPeoplePage(),
+    TasksPage()
   ];
 
   @override
@@ -50,7 +50,7 @@ class _NavigatorState extends State<MyAppNavigator> {
                   backgroundColor: Colors.red),
               BottomNavigationBarItem(
                   label: "Third",
-                  icon: Icon(Icons.access_alarm_rounded),
+                  icon: Icon(Icons.list_alt),
                   backgroundColor: Colors.deepPurple),
             ],
             currentIndex: currentPageIndex,//current index is what is selected currently

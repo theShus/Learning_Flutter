@@ -9,7 +9,7 @@ class RestClient{
   //This line defines a factory constructor for the RestClient class. Factory constructors are used to control the instantiation of objects.
   //In this case, it returns the _singleton instance created earlier. Factory constructors allow you to ensure that only a single
   //instance of a class is created during the application's lifetime.
-  factory RestClient(){
+  factory RestClient(){ //FACTORY KEYWORD allows you to return an instance of the class (here returning _singleton instance)
     return _singleton;
   }
 

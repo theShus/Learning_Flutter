@@ -5,7 +5,7 @@ import 'package:learning_demo/pages/people_bloc/people_page.dart';
 import 'package:learning_demo/rest_client.dart';
 
 
-class SecondPage extends StatelessWidget{
+class SecondPeoplePage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
