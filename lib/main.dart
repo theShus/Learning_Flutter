@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learning_demo/pages/navigator/navigator_people.dart';
-import 'package:learning_demo/pages/navigator/navigator_second.dart';
+import 'package:learning_demo/pages/navigator/navigator_people_bloc.dart';
 import 'package:learning_demo/pages/navigator/navigator_third.dart';
 
 void main() {
@@ -37,7 +37,7 @@ class _NavigatorState extends State<MyAppNavigator> {
             children: screens,
           ),
           bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.shifting,
+            type: BottomNavigationBarType.shifting, //todo stavi da je fixed ali da menja boju
             //ako bude default ili static mozes da stavis global background color
             items: const [
               BottomNavigationBarItem(
@@ -46,7 +46,7 @@ class _NavigatorState extends State<MyAppNavigator> {
                   backgroundColor: Colors.blue),
               BottomNavigationBarItem(
                   label: "Second",
-                  icon: Icon(Icons.accessible),
+                  icon: Icon(Icons.nature_people),
                   backgroundColor: Colors.red),
               BottomNavigationBarItem(
                   label: "Third",

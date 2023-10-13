@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learning_demo/rest_client.dart';
-import 'package:learning_demo/recyclerItems/person_item.dart';
+import 'package:learning_demo/recycler_items/person_item.dart';
 
 import '../../models/person.dart';
 
@@ -33,7 +33,7 @@ class _PeoplePageState extends State<PeoplePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("People list"),
+          title: const Text("People regular"),
           backgroundColor: Colors.blue,
         ),
         body: _people.length > 0
@@ -43,11 +43,11 @@ class _PeoplePageState extends State<PeoplePage> {
             : Center(
                 child: _loading
                     ? CircularProgressIndicator()
-                    : ElevatedButton(
+                    : OutlinedButton(
                         onPressed: () { //if I would put onPressed: _initPeople  that would bind the function to the click
                           _initPeople(); //and instead here we are calling the function
                         },
-                        child: Icon(Icons.downloading)),
+                        child: Icon(Icons.refresh)),
               ),
         floatingActionButton: FloatingActionButton(
           onPressed: () => print("!"),

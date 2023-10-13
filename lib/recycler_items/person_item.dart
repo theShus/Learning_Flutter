@@ -6,11 +6,13 @@ class PersonItem extends StatelessWidget {
   final Person person;
   // Image profileImage;
 
+  /* IMPORTANT CONSTRUCTOR KNOWLEDGE
+  // Consts(item1, [item2]) - [] znaci da je item2 opcioni i ne mora da se prosledi pri keraciji
+  // Consts(item1, {item2}) - {} znaci da je item2 opcioni I TAKODJE ako se prosledi mora da mu se prosledi ime new const(X, item2: Y)
+   */
   PersonItem({Key? key, required this.person}):
         // profileImage = Image.network(person.imageUrl),
         super(key: key);
-
-  //todo saznaj zasto ako postavim {} ispod konstruktora idalje racuna kao da profileImage nije tu inicijalizovan nego se buni
 
   //Originally was InkWell with the ListTile inside, think this is redundant and can be just ListItem
   //InkWell is used when you want an interactive area (button, list item, card...)

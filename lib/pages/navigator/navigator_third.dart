@@ -11,4 +11,6 @@ class ThirdPage extends StatelessWidget{
         body: Text("Third page"));
   }
 
+  //todo postavi MVC za mozda note keeping ili tasks
+
 }
