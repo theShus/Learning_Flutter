@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learning_demo/pages/navigator/navigator_people_bloc.dart';
 import 'package:learning_demo/rest_client.dart';
 import 'package:learning_demo/recycler_items/person_item.dart';
 
@@ -50,10 +51,9 @@ class _PeoplePageState extends State<PeoplePage> {
                         child: Icon(Icons.refresh)),
               ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () => print("!"),
-          //todo napravi da otvori isto ovo sranje ali sa bloc-om, dok ce druga stranica da bude lista
-          backgroundColor: Colors.lightBlueAccent,
-          child: Icon(Icons.add),
+          onPressed: () =>  Navigator.of(context).push(MaterialPageRoute(builder: (_) => SecondPeoplePage())),
+          backgroundColor: Colors.blueGrey,
+          child: Text("> Bloc< "),
         ));
   }
 }

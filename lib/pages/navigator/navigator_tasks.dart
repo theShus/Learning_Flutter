@@ -15,7 +15,7 @@ class TasksPage extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             title: Text("Third"),
-            backgroundColor: Colors.deepPurple,
+            backgroundColor: Colors.orangeAccent,
             bottom: TabBar(tabs: [
               Tab(text: "Todo", icon: Icon(Icons.list)),
               Tab(text: "In Progress", icon: Icon(Icons.access_time_sharp)),
