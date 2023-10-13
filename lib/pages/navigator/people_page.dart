@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learning_demo/pages/navigator/navigator_people_bloc.dart';
+import 'package:learning_demo/pages/navigator/people_page_bloc.dart';
 import 'package:learning_demo/rest_client.dart';
 import 'package:learning_demo/recycler_items/person_item.dart';
 
@@ -34,7 +34,7 @@ class _PeoplePageState extends State<PeoplePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("People regular"),
+          title: const Text("People recycler"),
           backgroundColor: Colors.blue,
         ),
         body: _people.length > 0
@@ -53,7 +53,7 @@ class _PeoplePageState extends State<PeoplePage> {
         floatingActionButton: FloatingActionButton(
           onPressed: () =>  Navigator.of(context).push(MaterialPageRoute(builder: (_) => SecondPeoplePage())),
           backgroundColor: Colors.blueGrey,
-          child: Text("> Bloc< "),
+          child: Text("> Bloc <"),
         ));
   }
 }

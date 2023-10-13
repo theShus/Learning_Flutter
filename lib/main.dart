@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:learning_demo/pages/navigator/navigator_people.dart';
-import 'package:learning_demo/pages/navigator/navigator_people_bloc.dart';
-import 'package:learning_demo/pages/navigator/navigator_tasks.dart';
-import 'package:learning_demo/pages/navigator/navigator_third.dart';
+import 'package:learning_demo/pages/navigator/people_page.dart';
+import 'package:learning_demo/pages/navigator/people_page_bloc.dart';
+import 'package:learning_demo/pages/navigator/tasks_page.dart';
+import 'package:learning_demo/pages/navigator/third_page.dart';
 
 void main() {
   runApp(const MyAppNavigator());

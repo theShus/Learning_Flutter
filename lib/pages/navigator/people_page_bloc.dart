@@ -11,7 +11,7 @@ class SecondPeoplePage extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("People bloc"),
+        title: const Text("People recycler BLOC"),
         backgroundColor: Colors.blueGrey,
       ),
       body: BlocProvider<PeoplePageBloc>( //Bloc provider ce da supply-uje okruzenje za bloc, dok u PeoplePageNew stavimo BlocBuilder
@@ -20,5 +20,4 @@ class SecondPeoplePage extends StatelessWidget{
       )
     );
   }
-
 }

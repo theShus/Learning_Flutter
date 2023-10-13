@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:learning_demo/models/task.dart';
 import 'package:learning_demo/pages/tabs/done_page.dart';
 import 'package:learning_demo/pages/tabs/inprogress_page.dart';
 import 'package:learning_demo/pages/tabs/todo_page.dart';
-import 'package:learning_demo/recycler_items/task_item.dart';
 
 class TasksPage extends StatelessWidget {
 
@@ -14,7 +12,7 @@ class TasksPage extends StatelessWidget {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
-            title: Text("Third"),
+            title: Text("Tasks MVC"),
             backgroundColor: Colors.orangeAccent,
             bottom: TabBar(tabs: [
               Tab(text: "Todo", icon: Icon(Icons.list)),
