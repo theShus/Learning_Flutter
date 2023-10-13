@@ -15,6 +15,7 @@ class MyAppNavigator extends StatefulWidget {
 
 class _NavigatorState extends State<MyAppNavigator> {
   int currentPageIndex = 0;
+  List<Color> pageColors = [Colors.blue, Colors.yellow, Colors.deepPurple];
   final screens = [
     PeoplePage(),
     SecondPeoplePage(),
@@ -31,27 +32,23 @@ class _NavigatorState extends State<MyAppNavigator> {
             useMaterial3: true,
             visualDensity: VisualDensity.adaptivePlatformDensity),
         home: Scaffold(
-          // body: screens[pageIndex], NE MOZE SAMO LISTA JER NE CUVA DECU ZIVU U WIDGET TREE
-          body: IndexedStack(
-            index: currentPageIndex,
+          body: IndexedStack( // body: screens[pageIndex], NE MOZE SAMO LISTA JER NE CUVA DECU ZIVU U WIDGET TREE
+          index: currentPageIndex,
             children: screens,
           ),
           bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.shifting, //todo stavi da je fixed ali da menja boju
-            //ako bude default ili static mozes da stavis global background color
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: pageColors[currentPageIndex],
             items: const [
               BottomNavigationBarItem(
                   label: "First",
-                  icon: Icon(Icons.people),
-                  backgroundColor: Colors.blue),
+                  icon: Icon(Icons.people)),
               BottomNavigationBarItem(
                   label: "Second",
-                  icon: Icon(Icons.nature_people),
-                  backgroundColor: Colors.red),
+                  icon: Icon(Icons.nature_people)),
               BottomNavigationBarItem(
                   label: "Third",
-                  icon: Icon(Icons.list_alt),
-                  backgroundColor: Colors.deepPurple),
+                  icon: Icon(Icons.list_alt)),
             ],
             currentIndex: currentPageIndex,//current index is what is selected currently
             onTap: (int clickedPageIndex) {

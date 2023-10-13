@@ -12,7 +12,7 @@ class SecondPeoplePage extends StatelessWidget{
     return Scaffold(
       appBar: AppBar(
         title: const Text("People bloc"),
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.yellow,
       ),
       body: BlocProvider<PeoplePageBloc>( //Bloc provider ce da supply-uje okruzenje za bloc, dok u PeoplePageNew stavimo BlocBuilder
         create: (context) => PeoplePageBloc(client: RestClient()),
