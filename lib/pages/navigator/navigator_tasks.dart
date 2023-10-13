@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:learning_demo/models/task.dart';
+import 'package:learning_demo/pages/tabs/done_page.dart';
+import 'package:learning_demo/pages/tabs/inprogress_page.dart';
+import 'package:learning_demo/pages/tabs/todo_page.dart';
 import 'package:learning_demo/recycler_items/task_item.dart';
 
 class TasksPage extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,12 +24,9 @@ class TasksPage extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              TaskItem(task: Task(
-                  title: "Task title",
-                  description: "Short description",
-                  urgency: Urgency.medium)),
-              Text("Second"),
-              Text("Third"),
+              TodoPage(),
+              InProgressPage(),
+              DonePage(),
             ],
           ),
         ),

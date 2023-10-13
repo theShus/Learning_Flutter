@@ -51,7 +51,7 @@ class _PeoplePageState extends State<PeoplePage> {
               ),
         floatingActionButton: FloatingActionButton(
           onPressed: () => print("!"),
-          //todo make it do something, maybe a new page for a custom person
+          //todo napravi da otvori isto ovo sranje ali sa bloc-om, dok ce druga stranica da bude lista
           backgroundColor: Colors.lightBlueAccent,
           child: Icon(Icons.add),
         ));
