@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import '../models/task.dart';
 
+enum CallbackFunctionType {DELETE, EDIT, RIGHT, LEFT}
+
 class TaskItem extends StatelessWidget {
   final Task task;
+  // final VoidCallback onButtonPressed;
+  final Function(CallbackFunctionType, Task) onButtonPressed;
 
-  TaskItem({Key? key, required this.task}) : super(key: key);
+  TaskItem({Key? key, required this.task, required this.onButtonPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +22,14 @@ class TaskItem extends StatelessWidget {
             ),
           ),
           child: ListTile(
-            contentPadding: EdgeInsets.symmetric(
-                horizontal: 16.0, vertical: 8.0),
+            contentPadding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+
             title: RichText(
               text: TextSpan(
                 style: DefaultTextStyle.of(context).style,
                 children: [
                   TextSpan(text: task.title,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                  TextSpan(text: ' - Urgency: ',),
+                  TextSpan(text: '\n- Urgency: ',),
                   if (task.urgency == Urgency.low)
                     _urgencyText(Colors.orangeAccent)
                   else if (task.urgency == Urgency.medium)
@@ -39,14 +43,19 @@ class TaskItem extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               // Ensure the Row takes minimum space
               children: [
-                if (task.progress != Progress.todo)
+                _roundedButton(Icons.edit, Colors.grey, () {
+                  onButtonPressed(CallbackFunctionType.EDIT, task);
+                }),
+                _roundedButton(Icons.delete, Colors.redAccent, () {
+                  onButtonPressed(CallbackFunctionType.DELETE, task);
+                }),
+                if (task.progress == Progress.IN_PROGRESS)
                   _roundedButton(Icons.arrow_back, Colors.orange, () {
-                    // Handle the left button action
+                    onButtonPressed(CallbackFunctionType.LEFT, task);
                   }),
-                SizedBox(height: 0, width: 15),
-                if (task.progress != Progress.done)
+                if (task.progress != Progress.DONE)
                   _roundedButton(Icons.arrow_forward, Colors.orange, () {
-                    // Handle the left button action
+                    onButtonPressed(CallbackFunctionType.RIGHT, task);
                   }),
               ],
             ),
@@ -58,18 +67,23 @@ class TaskItem extends StatelessWidget {
   }
 
   Widget _roundedButton(IconData icon, Color color, VoidCallback onPressed) {
-    return Container(
-      width: 40.0,
-      height: 40.0,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: color,
-      ),
-      child: IconButton(
-        icon: Icon(icon),
-        color: Colors.white,
-        onPressed: onPressed,
-      ),
+    return Row(
+      children: [
+        SizedBox(height: 0, width: 15),
+        Container(
+          width: 40.0,
+          height: 40.0,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: color,
+          ),
+          child: IconButton(
+            icon: Icon(icon),
+            color: Colors.white,
+            onPressed: onPressed,
+          ),
+        ),
+      ],
     );
   }
 

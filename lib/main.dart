@@ -42,14 +42,14 @@ class _NavigatorState extends State<MyAppNavigator> {
             backgroundColor: pageColors[currentPageIndex],
             items: const [
               BottomNavigationBarItem(
-                  label: "First",
+                  label: "People",
                   icon: Icon(Icons.people)),
               BottomNavigationBarItem(
-                  label: "Second",
-                  icon: Icon(Icons.nature_people)),
+                  label: "Tasks",
+                  icon: Icon(Icons.list_alt)),
               BottomNavigationBarItem(
                   label: "Third",
-                  icon: Icon(Icons.list_alt)),
+                  icon: Icon(Icons.question_mark)),
             ],
             currentIndex: currentPageIndex,//current index is what is selected currently
             onTap: (int clickedPageIndex) {

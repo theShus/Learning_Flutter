@@ -51,6 +51,7 @@ class _PeoplePageState extends State<PeoplePage> {
                         child: Icon(Icons.refresh)),
               ),
         floatingActionButton: FloatingActionButton(
+          heroTag: "PeopleBtn",
           onPressed: () =>  Navigator.of(context).push(MaterialPageRoute(builder: (_) => SecondPeoplePage())),
           backgroundColor: Colors.blueGrey,
           child: Text("> Bloc <"),
