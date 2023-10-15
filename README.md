@@ -1,16 +1,14 @@
 # learning_demo
 
-A new Flutter project.
 
-## Getting Started
+This project is built based on the Flutter road map for the purpose of teaching (my self) the language.
 
-This project is a starting point for a Flutter application.
+It consists of a Bottom page navigator which contains
 
-A few resources to get you started if this is your first Flutter project:
+# 1.1 people recycler
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+# 1.2 bloc people recycler
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# 2 task page with db
+
+# 3
