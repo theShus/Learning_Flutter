@@ -1,5 +1,4 @@
-import 'package:learning_demo/database_tasks.dart';
-import 'package:learning_demo/tabs_mvc/tabs_controller_interface.dart';
+import 'package:learning_demo/tabs_mvc/interface/tabs_controller_interface.dart';
 import 'package:learning_demo/tabs_mvc/tabs_model.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../models/task.dart';
@@ -14,29 +13,28 @@ class TabsController extends ControllerMVC implements TabsControllerInterface {
     Urgency.low: 2,
   };
 
+  TabsController._initSingleton();
+
   factory TabsController() {
     return instance;
   }
 
-  TabsController._initSingleton();
-
-
-  // List<Task> get todoTasks => TabsModel.todoTasks;
-  // List<Task> get inProgressTasks => TabsModel.inProgressTasks;
-  // List<Task> get doneTasks => TabsModel.doneTasks;
 
   @override
   List<Task> getTodoTasks() {
+    sortTasksByUrgency();
     return TabsModel.todoTasks;
   }
 
   @override
   List<Task> getInProgressTasks() {
+    sortTasksByUrgency();
     return TabsModel.inProgressTasks;
   }
 
   @override
   List<Task> getDoneTasks() {
+    sortTasksByUrgency();
     return TabsModel.todoTasks;
   }
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../models/task.dart';
 import '../../recycler_items/task_item.dart';
 import '../../tabs_mvc/tabs_controller.dart';
-import '../add_task_page.dart';
+import '../../tabs_mvc/interface/tabs_controller_interface.dart';
 import '../edit_task_page.dart';
 
 class DonePage extends StatefulWidget{
@@ -13,7 +13,7 @@ class DonePage extends StatefulWidget{
 
 class _DonePageState extends State<DonePage> {
 
-  final TabsController tabsController = TabsController();
+  final TabsControllerInterface tabsController = TabsController();
 
   void onTaskItemButtonPressed(CallbackFunctionType type, Task task) {
     setState(() {
@@ -22,7 +22,6 @@ class _DonePageState extends State<DonePage> {
         case CallbackFunctionType.EDIT: OpenEditTaskPage(context, task);
         default: print("Error occurred");
       }
-      tabsController.sortTasksByUrgency();
     });
   }
 

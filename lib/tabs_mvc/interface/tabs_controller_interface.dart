@@ -1,4 +1,4 @@
-import '../models/task.dart';
+import '../../models/task.dart';
 
 abstract class TabsControllerInterface {
 

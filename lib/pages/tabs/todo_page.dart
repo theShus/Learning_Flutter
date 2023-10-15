@@ -4,6 +4,7 @@ import 'package:learning_demo/pages/add_task_page.dart';
 import 'package:learning_demo/pages/edit_task_page.dart';
 import 'package:learning_demo/recycler_items/task_item.dart';
 import 'package:learning_demo/tabs_mvc/tabs_controller.dart';
+import 'package:learning_demo/tabs_mvc/interface/tabs_controller_interface.dart';
 
 class TodoPage extends StatefulWidget {
   @override
@@ -12,7 +13,7 @@ class TodoPage extends StatefulWidget {
 
 class _TodoPageState extends State<TodoPage> {
 
-  final TabsController tabsController = TabsController();
+  final TabsControllerInterface tabsController = TabsController();
 
   void onTaskItemButtonPressed(CallbackFunctionType type, Task task) {
     setState(() {
@@ -22,7 +23,6 @@ class _TodoPageState extends State<TodoPage> {
         case CallbackFunctionType.EDIT: OpenEditTaskPage(context, task);
         default: print("Error occurred");
       }
-      tabsController.sortTasksByUrgency();
     });
   }
 
