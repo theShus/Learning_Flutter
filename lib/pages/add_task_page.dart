@@ -86,7 +86,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
               width: 250,
               child: ElevatedButton(
                 onPressed: () {
-                  Task newTask = Task(title: titleController.text, description: descriptionController.text, urgency: selectedUrgency,);
+                  Task newTask = Task(title: titleController.text, description: descriptionController.text, urgency: selectedUrgency, progress: Progress.TODO);
                   Navigator.pop(context, newTask);//WE ARE RETURNING VALUE BACK TO THE CONTROLLER !!!
                 },
                 child: Text('Create'),

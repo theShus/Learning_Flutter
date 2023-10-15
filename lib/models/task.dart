@@ -1,15 +1,32 @@
-import 'dart:ffi';
-
-import 'package:learning_demo/tabs_mvc/tabs_model.dart';
-
 class Task {
-  int id = TabsModel.setTaskId();
+  int? id;
   String title;
   String description;
   Urgency urgency;
   Progress progress;
 
-  Task({required this.title, required this.description, required this.urgency, this.progress = Progress.TODO});
+  Task({this.id, required this.title, required this.description, required this.urgency, required this.progress});
+  // Task({required this.title, required this.description, required this.urgency, this.progress = Progress.TODO});
+
+  Map<String, dynamic> toMap(){
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'urgency': urgency,
+      'progress': progress,
+    };
+  }
+
+  factory Task.fromMap(Map<String, dynamic> map){
+    return Task(
+        id: map['id'],
+        title: map['title'],
+        description: map['description'],
+        urgency: map['urgency'],
+        progress: map['progress'],
+    );
+  }
 
   @override
   String toString() {

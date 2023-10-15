@@ -32,7 +32,8 @@ class _TodoPageState extends State<TodoPage> {
     Task taskToAdd = await Navigator.push(context, MaterialPageRoute(builder: (context) => AddTaskPage()));
     if (!mounted) return;//OVO NAS STITI AKO SE STRANICA ZATVORI, DA NE VRATI NULL
 
-    setState(() => tabsController.todoTasks.add(taskToAdd));
+    setState(() => tabsController.createTask(taskToAdd));
+
     ScaffoldMessenger.of(context)
       ..removeCurrentSnackBar()
       ..showSnackBar(SnackBar(content: Text("Task " + taskToAdd.title + " created")));
@@ -48,7 +49,7 @@ class _TodoPageState extends State<TodoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        children: tabsController.todoTasks
+        children: tabsController.getTodoTasks()
             .map((task) => TaskItem(
                   task: task,
                   onButtonPressed: (CallbackFunctionType type, Task task) => onTaskItemButtonPressed(type, task)

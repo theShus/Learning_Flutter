@@ -41,7 +41,7 @@ class _InProgressPageState extends State<InProgressPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        children: tabsController.inProgressTasks
+        children: tabsController.getInProgressTasks()
             .map((task) => TaskItem(
             task: task,
             onButtonPressed: (CallbackFunctionType type, Task task) => onTaskItemButtonPressed(type, task)

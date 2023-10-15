@@ -38,7 +38,7 @@ class _DonePageState extends State<DonePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        children: tabsController.doneTasks
+        children: tabsController.getDoneTasks()
             .map((task) => TaskItem(
             task: task,
             onButtonPressed: (CallbackFunctionType type, Task task) => onTaskItemButtonPressed(type, task)

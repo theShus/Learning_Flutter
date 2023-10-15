@@ -1,10 +1,12 @@
+import 'package:learning_demo/database_tasks.dart';
+import 'package:learning_demo/tabs_mvc/tabs_controller_interface.dart';
 import 'package:learning_demo/tabs_mvc/tabs_model.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../models/task.dart';
 
-class TabsController extends ControllerMVC {
+class TabsController extends ControllerMVC implements TabsControllerInterface {
 
-  static TabsController _tabsSingleton = TabsController._initSingleton();
+  static TabsController instance = TabsController._initSingleton();
 
   Map<Urgency, int> urgencyValues = {
     Urgency.high: 0,
@@ -13,49 +15,69 @@ class TabsController extends ControllerMVC {
   };
 
   factory TabsController() {
-    return _tabsSingleton;
+    return instance;
   }
 
   TabsController._initSingleton();
 
-  Task findBook(int id) => TabsModel.todoTasks.firstWhere((book) => book.id == id);
 
-  List<Task> get todoTasks => TabsModel.todoTasks;
-  List<Task> get inProgressTasks => TabsModel.inProgressTasks;
-  List<Task> get doneTasks => TabsModel.doneTasks;
+  // List<Task> get todoTasks => TabsModel.todoTasks;
+  // List<Task> get inProgressTasks => TabsModel.inProgressTasks;
+  // List<Task> get doneTasks => TabsModel.doneTasks;
 
+  @override
+  List<Task> getTodoTasks() {
+    return TabsModel.todoTasks;
+  }
+
+  @override
+  List<Task> getInProgressTasks() {
+    return TabsModel.inProgressTasks;
+  }
+
+  @override
+  List<Task> getDoneTasks() {
+    return TabsModel.todoTasks;
+  }
+
+  @override
   void moveTaskToInProgress(Task task) {
     TabsModel.todoTasks.remove(task);
     task.progress = Progress.IN_PROGRESS;
     TabsModel.inProgressTasks.add(task);
   }
 
+  @override
   void moveTaskToTodo(Task task) {
     TabsModel.inProgressTasks.remove(task);
     task.progress = Progress.TODO;
     TabsModel.todoTasks.add(task);
   }
 
+  @override
   void moveTaskToDone(Task task) {
     TabsModel.inProgressTasks.remove(task);
     task.progress = Progress.DONE;
     TabsModel.doneTasks.add(task);
   }
 
-  void createTask(String title, String description, Urgency urgency){
-    TabsModel.todoTasks.add(Task(title: title, description: description, urgency: urgency));
+  @override
+  void createTask(Task task){
+    TabsModel.todoTasks.add(Task(title: task.title, description: task.description, urgency: task.urgency, progress: Progress.TODO));
   }
 
+  @override
   void deleteTask(Task task) {
     if (task.progress == Progress.TODO) TabsModel.todoTasks.remove(task);
     else if (task.progress == Progress.IN_PROGRESS) TabsModel.inProgressTasks.remove(task);
     else if (task.progress == Progress.DONE) TabsModel.doneTasks.remove(task);
   }
 
+  @override
   void editTask(Task editedTask) {
-    if (editedTask.progress == Progress.TODO) getAndEditTask(todoTasks, editedTask);
-    else if (editedTask.progress == Progress.IN_PROGRESS) getAndEditTask(inProgressTasks, editedTask);
-    else if (editedTask.progress == Progress.DONE) getAndEditTask(doneTasks, editedTask);
+    if (editedTask.progress == Progress.TODO) getAndEditTask(getTodoTasks(), editedTask);
+    else if (editedTask.progress == Progress.IN_PROGRESS) getAndEditTask(getInProgressTasks(), editedTask);
+    else if (editedTask.progress == Progress.DONE) getAndEditTask(getDoneTasks(), editedTask);
     sortTasksByUrgency();
   }
 
@@ -72,9 +94,9 @@ class TabsController extends ControllerMVC {
   }
 
   void sortTasksByUrgency(){
-    todoTasks.sort((a, b) => urgencyValues[a.urgency]!.compareTo(urgencyValues[b.urgency] as num));
-    inProgressTasks.sort((a, b) => urgencyValues[a.urgency]!.compareTo(urgencyValues[b.urgency] as num));
-    doneTasks.sort((a, b) => urgencyValues[a.urgency]!.compareTo(urgencyValues[b.urgency] as num));
+    TabsModel.todoTasks.sort((a, b) => urgencyValues[a.urgency]!.compareTo(urgencyValues[b.urgency] as num));
+    TabsModel.inProgressTasks.sort((a, b) => urgencyValues[a.urgency]!.compareTo(urgencyValues[b.urgency] as num));
+    TabsModel.doneTasks.sort((a, b) => urgencyValues[a.urgency]!.compareTo(urgencyValues[b.urgency] as num));
   }
 
 }

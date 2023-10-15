@@ -98,7 +98,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
               width: 250,
               child: ElevatedButton(
                 onPressed: () {
-                  Task editedTask = Task(title: titleController.text, description: descriptionController.text, urgency: selectedUrgency,);
+                  Task editedTask = Task(title: titleController.text, description: descriptionController.text, urgency: selectedUrgency, progress: Progress.TODO);
                   editedTask.id = widget.task.id;
                   Navigator.pop(context, editedTask);//WE ARE RETURNING VALUE BACK TO THE CONTROLLER !!!
                 },
