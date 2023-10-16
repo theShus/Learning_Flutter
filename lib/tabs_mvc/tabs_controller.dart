@@ -1,4 +1,4 @@
-import 'package:learning_demo/tabs_mvc/interface/tabs_controller_interface.dart';
+import 'package:learning_demo/tabs_mvc/tabs_controller_interface.dart';
 import 'package:learning_demo/tabs_mvc/tabs_model.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../models/task.dart';
