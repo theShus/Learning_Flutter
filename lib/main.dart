@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learning_demo/pages/navigator/people_page.dart';
-import 'package:learning_demo/pages/navigator/people_page_bloc.dart';
+import 'package:learning_demo/pages/navigator/second_people_page.dart';
 import 'package:learning_demo/pages/navigator/tasks_page.dart';
 import 'package:learning_demo/pages/navigator/third_page.dart';
 

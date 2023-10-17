@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learning_demo/pages/navigator/people_page_bloc.dart';
+import 'package:learning_demo/pages/navigator/second_people_page.dart';
 import 'package:learning_demo/rest_client.dart';
 import 'package:learning_demo/recycler_items/person_item.dart';
 

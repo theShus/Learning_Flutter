@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learning_demo/pages/people_bloc/components/people_page_bloc.dart';
-import 'package:learning_demo/pages/people_bloc/people_page.dart';
+import 'package:learning_demo/pages/people_bloc/bloc_people_page.dart';
 import 'package:learning_demo/rest_client.dart';
 
 

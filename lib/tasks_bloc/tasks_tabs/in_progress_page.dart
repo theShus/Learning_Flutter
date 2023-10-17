@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../models/task.dart';
-import '../../recycler_items/task_item.dart';
-import '../../tabs_mvc/tabs_controller.dart';
-import '../../tabs_mvc/tabs_controller_interface.dart';
-import '../edit_task_page.dart';
+import '../../../models/task.dart';
+import '../../../recycler_items/task_item.dart';
+import '../../../tasks_mvc/tabs_controller.dart';
+import '../../../tasks_mvc/tabs_controller_interface.dart';
+import '../../pages/tasks/edit_task_page.dart';
 
 class InProgressPage extends StatefulWidget{
 

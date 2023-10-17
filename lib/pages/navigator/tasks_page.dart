@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:learning_demo/pages/tabs/done_page.dart';
-import 'package:learning_demo/pages/tabs/in_progress_page.dart';
-import 'package:learning_demo/pages/tabs/todo_page.dart';
+import 'package:learning_demo/pages/tasks/tabs/done_page.dart';
+import 'package:learning_demo/pages/tasks/tabs/in_progress_page.dart';
+import 'package:learning_demo/pages/tasks/tabs/todo_page.dart';
 
 class TasksPage extends StatelessWidget {
 

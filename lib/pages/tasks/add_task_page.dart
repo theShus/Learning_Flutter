@@ -1,31 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import '../models/task.dart';
-import '../tabs_mvc/tabs_controller.dart';
+import '../../models/task.dart';
 
-class EditTaskPage extends StatefulWidget {
-  final Task task;
-
-  EditTaskPage({required this.task});
-
+class AddTaskPage extends StatefulWidget {
   @override
-  _EditTaskPageState createState() => _EditTaskPageState(task.urgency);
+  _AddTaskPageState createState() => _AddTaskPageState();
 }
 
-class _EditTaskPageState extends State<EditTaskPage> {
+class _AddTaskPageState extends State<AddTaskPage> {
 
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   Urgency selectedUrgency = Urgency.low;
 
-  _EditTaskPageState(this.selectedUrgency);//this is a little ugly but can't be done differently aka with widget
-                                          //if done with widget it will perma lock it on old value
-
   @override
   Widget build(BuildContext context) {
-    titleController.text = widget.task.title;
-    descriptionController.text = widget.task.description;
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Create Task'),
@@ -98,11 +86,10 @@ class _EditTaskPageState extends State<EditTaskPage> {
               width: 250,
               child: ElevatedButton(
                 onPressed: () {
-                  Task editedTask = Task(title: titleController.text, description: descriptionController.text, urgency: selectedUrgency, progress: Progress.TODO);
-                  editedTask.id = widget.task.id;
-                  Navigator.pop(context, editedTask);//WE ARE RETURNING VALUE BACK TO THE CONTROLLER !!!
+                  Task newTask = Task(title: titleController.text, description: descriptionController.text, urgency: selectedUrgency, progress: Progress.TODO);
+                  Navigator.pop(context, newTask);//WE ARE RETURNING VALUE BACK TO THE CONTROLLER !!!
                 },
-                child: Text('Edit'),
+                child: Text('Create'),
               ),
             ),
           ],
