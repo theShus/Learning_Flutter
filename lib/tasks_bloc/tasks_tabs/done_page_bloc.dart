@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../models/task.dart';
 import '../../../recycler_items/task_item.dart';
 import '../../../tasks_mvc/tabs_controller.dart';
 import '../../../tasks_mvc/tabs_controller_interface.dart';
 import '../../pages/tasks/edit_task_page.dart';
+import '../task_bloc.dart';
+import '../task_state.dart';
 
-class DonePage extends StatefulWidget{
+class DonePageBloc extends StatefulWidget{
 
   @override
-  State<DonePage> createState() => _DonePageState();
+  State<DonePageBloc> createState() => _DonePageBlocState();
 }
 
-class _DonePageState extends State<DonePage> {
+class _DonePageBlocState extends State<DonePageBloc> {
 
   final TabsControllerInterface tabsController = TabsController();
 
@@ -35,14 +38,23 @@ class _DonePageState extends State<DonePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        children: tabsController.getDoneTasks()
-            .map((task) => TaskItem(
-            task: task,
-            onButtonPressed: (CallbackFunctionType type, Task task) => onTaskItemButtonPressed(type, task)
-        )).toList(),
-      ),
+    return BlocBuilder<TaskBloc, TaskState>(
+      builder: (context, state) {
+        if (state is TasksLoaded)
+          return Scaffold(
+            body: ListView(
+              children: state.doneTasks
+                  .map((task) => TaskItem(
+                  task: task,
+                  onButtonPressed: (CallbackFunctionType type, Task task) => onTaskItemButtonPressed(type, task)))
+                  .toList(),
+            ),
+          );
+        else if (state is TasksLoading)
+          return CircularProgressIndicator();
+        else
+          return Text("Error while loading");
+      },
     );
   }
 }

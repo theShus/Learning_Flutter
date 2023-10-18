@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:learning_demo/pages/navigator/people_page.dart';
 import 'package:learning_demo/pages/navigator/second_people_page.dart';
 import 'package:learning_demo/pages/navigator/tasks_page.dart';
-import 'package:learning_demo/pages/navigator/third_page.dart';
+import 'package:learning_demo/pages/navigator/tasks_with_bloc_page.dart';
 
 void main() {
   runApp(const MyAppNavigator());
@@ -20,7 +20,7 @@ class _NavigatorState extends State<MyAppNavigator> {
   final screens = [
     PeoplePage(),
     TasksPage(),
-    ThirdPage()
+    TasksWithBlocPage()
   ];
 
   @override
