@@ -51,7 +51,10 @@ class _TodoPageBlocState extends State<TodoPageBloc> {
     Task editedTask = await Navigator.push(context,
         MaterialPageRoute(builder: (context) => EditTaskPage(task: task)));
     if (!mounted) return;
-    setState(() => tabsController.editTask(editedTask));
+
+    setState(() {
+      context.read<TaskBloc>().add(UpdateTask(task: editedTask));
+    });
   }
 
   @override

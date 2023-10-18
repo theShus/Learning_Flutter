@@ -58,14 +58,14 @@ class TaskDataBase {
     return await db.insert(table, task.toMap());
   }
 
-  // Retrieve all task from the database
-  Future<List<Task>> getAllTasks() async {
-    Database db = await instance.database;
-    List<Map<String, dynamic>> maps = await db.query(table);
-    return List.generate(maps.length, (i) {
-      return Task.fromMap(maps[i]);
-    });
-  }
+  // // Retrieve all task from the database
+  // Future<List<Task>> getAllTasks() async {
+  //   Database db = await instance.database;
+  //   List<Map<String, dynamic>> maps = await db.query(table);
+  //   return List.generate(maps.length, (i) {
+  //     return Task.fromMap(maps[i]);
+  //   });
+  // }
 
   // Update a task in the database
   Future<int> update(Task task) async {

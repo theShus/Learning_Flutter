@@ -27,8 +27,9 @@ class _InProgressPageBlocState extends State<InProgressPageBloc> {
         case CallbackFunctionType.DELETE:
           context.read<TaskBloc>().add(DeleteTask(task: task));
         case CallbackFunctionType.EDIT:
-          OpenEditTaskPage(context, task);
-        default:
+          setState(() {
+            OpenEditTaskPage(context, task);
+          });        default:
           print("Error occurred");
       }
     });
@@ -39,7 +40,9 @@ class _InProgressPageBlocState extends State<InProgressPageBloc> {
         MaterialPageRoute(builder: (context) => EditTaskPage(task: task)));
     if (!mounted) return;
     editedTask.progress = Progress.IN_PROGRESS;
-    setState(() => tabsController.editTask(editedTask));
+    setState(() {
+      context.read<TaskBloc>().add(UpdateTask(task: editedTask));
+    });
   }
 
   @override

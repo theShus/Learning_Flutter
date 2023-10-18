@@ -28,7 +28,8 @@ class TaskItem extends StatelessWidget {
               text: TextSpan(
                 style: DefaultTextStyle.of(context).style,
                 children: [
-                  TextSpan(text: task.title,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                  TextSpan(text: task.title,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                   TextSpan(text: '\n- Urgency: ',),
                   if (task.urgency == Urgency.low)
                     _urgencyText(Colors.orangeAccent)

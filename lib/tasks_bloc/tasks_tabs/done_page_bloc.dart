@@ -23,8 +23,10 @@ class _DonePageBlocState extends State<DonePageBloc> {
         case CallbackFunctionType.DELETE:
           context.read<TaskBloc>().add(DeleteTask(task: task));
         case CallbackFunctionType.EDIT:
-          OpenEditTaskPage(context, task);
-        default:
+          setState(() {
+            OpenEditTaskPage(context, task);
+          });
+          default:
           print("Error occurred");
       }
     });
@@ -35,7 +37,9 @@ class _DonePageBlocState extends State<DonePageBloc> {
         MaterialPageRoute(builder: (context) => EditTaskPage(task: task)));
     if (!mounted) return;
     editedTask.progress = Progress.DONE;
-    setState(() => tabsController.editTask(editedTask));
+    setState(() {
+      context.read<TaskBloc>().add(UpdateTask(task: editedTask));
+    });
   }
 
   @override

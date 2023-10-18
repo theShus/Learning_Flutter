@@ -35,25 +35,50 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   }
 
   void _UpdateTasks(UpdateTask event, Emitter<TaskState> emit) {
-    // emit();
+    final state = this.state;
+    
+    if (state is TasksLoaded) {
+      if (event.task.progress == Progress.TODO) getAndEditTask(state.todoTasks, event.task);
+      else if (event.task.progress == Progress.IN_PROGRESS) getAndEditTask(state.inProgressTasks, event.task);
+      else if (event.task.progress == Progress.DONE) getAndEditTask(state.doneTasks, event.task);
+
+      emit(TasksLoaded(
+          todoTasks: List.from(state.todoTasks),
+          inProgressTasks: List.from(state.inProgressTasks),
+          doneTasks: List.from(state.doneTasks)
+      ));
+    }
   }
 
   void _DeleteTasks(DeleteTask event, Emitter<TaskState> emit) {
     final state = this.state;
 
     if (state is TasksLoaded) {
-      List<Task> newTodoTasks = List.of(state.todoTasks);
-      List<Task> newInProgressTasks = List.of(state.inProgressTasks);
-      List<Task> newDoneTasks = List.of(state.doneTasks);
+      if (event.task.progress == Progress.TODO) state.todoTasks.remove(event.task);
+      else if (event.task.progress == Progress.IN_PROGRESS) state.inProgressTasks.remove(event.task);
+      else if (event.task.progress == Progress.DONE) state.doneTasks.remove(event.task);
 
-      if (event.task.progress == Progress.TODO)
-        newTodoTasks = List.of(state.todoTasks)..remove(event.task);
-      else if (event.task.progress == Progress.IN_PROGRESS)
-        newInProgressTasks = List.of(state.todoTasks)..remove(event.task);
-      else if (event.task.progress == Progress.DONE)
-        newDoneTasks = List.of(state.todoTasks)..remove(event.task);
+      emit(TasksLoaded(
+          todoTasks: List.from(state.todoTasks),
+          inProgressTasks: List.from(state.inProgressTasks),
+          doneTasks: List.from(state.doneTasks)
+      ));
+    }
+  }
 
-      emit(TasksLoaded(todoTasks: newTodoTasks, inProgressTasks: newInProgressTasks, doneTasks: newDoneTasks));
+  void getAndEditTask(List<Task> taskList, Task editedTask) {
+    print("USLI SMO U SEARCH");
+    for (Task task in taskList) {
+      print("POREDIMO:");
+      print(task.toString());
+      print(editedTask);
+      if (task.id == editedTask.id) {
+        print("NASLI SMO GA");
+        task.title = editedTask.title;
+        task.description = editedTask.description;
+        task.urgency = editedTask.urgency;
+        break;
+      }
     }
   }
 }
