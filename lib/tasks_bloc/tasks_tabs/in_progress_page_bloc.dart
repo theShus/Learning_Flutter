@@ -20,10 +20,14 @@ class _InProgressPageBlocState extends State<InProgressPageBloc> {
   void onTaskItemButtonPressed(CallbackFunctionType type, Task task) {
     setState(() {
       switch (type) {
-        case CallbackFunctionType
-              .RIGHT: //todo tabsController.moveTaskToDone(task);
-        case CallbackFunctionType
-              .LEFT: //todo tabsController.moveTaskToTodo(task);
+        case CallbackFunctionType.RIGHT:
+          setState(() {
+            context.read<TaskBloc>().add(MoveTaskToDone(task: task));
+          });
+        case CallbackFunctionType.LEFT:
+          setState(() {
+            context.read<TaskBloc>().add(MoveTaskToTodo(task: task));
+          });
         case CallbackFunctionType.DELETE:
           context.read<TaskBloc>().add(DeleteTask(task: task));
         case CallbackFunctionType.EDIT:

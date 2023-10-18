@@ -42,3 +42,27 @@ class DeleteTask extends TaskEvent{
   @override
   List<Object> get props  => [task];
 }
+
+class MoveTaskToInProgress extends TaskEvent{
+  final Task task;
+  const MoveTaskToInProgress({required this.task});
+
+  @override
+  List<Object> get props  => [task];
+}
+
+class MoveTaskToDone extends TaskEvent{
+  final Task task;
+  const MoveTaskToDone({required this.task});
+
+  @override
+  List<Object> get props  => [task];
+}
+
+class MoveTaskToTodo extends TaskEvent{
+  final Task task;
+  const MoveTaskToTodo({required this.task});
+
+  @override
+  List<Object> get props  => [task];
+}

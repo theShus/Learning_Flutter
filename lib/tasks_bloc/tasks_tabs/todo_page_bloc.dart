@@ -23,7 +23,9 @@ class _TodoPageBlocState extends State<TodoPageBloc> {
     setState(() {
       switch (type) {
         case CallbackFunctionType.RIGHT:
-        // todo tabsController.moveTaskToInProgress(task);
+          setState(() {
+            context.read<TaskBloc>().add(MoveTaskToInProgress(task: task));
+          });
         case CallbackFunctionType.DELETE:
           context.read<TaskBloc>().add(DeleteTask(task: task));
         case CallbackFunctionType.EDIT:

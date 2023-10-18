@@ -1,9 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learning_demo/tasks_bloc/components/task_event.dart';
 import 'package:learning_demo/tasks_bloc/components/task_state.dart';
-
 import '../../models/task.dart';
-import '../../tasks_mvc/tabs_model.dart';
 
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
   TaskBloc() : super(TasksLoading()) {
@@ -11,6 +9,9 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     on<AddTask>(_AddTasks);
     on<UpdateTask>(_UpdateTasks);
     on<DeleteTask>(_DeleteTasks);
+    on<MoveTaskToTodo>(_MoveTaskToTodo);
+    on<MoveTaskToInProgress>(_MoveTaskToInProgress);
+    on<MoveTaskToDone>(_MoveTaskToDone);
   }
 
   void _OnLoadTasks(LoadTasks event, Emitter<TaskState> emit) {
@@ -36,17 +37,19 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
   void _UpdateTasks(UpdateTask event, Emitter<TaskState> emit) {
     final state = this.state;
-    
+
     if (state is TasksLoaded) {
-      if (event.task.progress == Progress.TODO) getAndEditTask(state.todoTasks, event.task);
-      else if (event.task.progress == Progress.IN_PROGRESS) getAndEditTask(state.inProgressTasks, event.task);
-      else if (event.task.progress == Progress.DONE) getAndEditTask(state.doneTasks, event.task);
+      if (event.task.progress == Progress.TODO)
+        getAndEditTask(state.todoTasks, event.task);
+      else if (event.task.progress == Progress.IN_PROGRESS)
+        getAndEditTask(state.inProgressTasks, event.task);
+      else if (event.task.progress == Progress.DONE)
+        getAndEditTask(state.doneTasks, event.task);
 
       emit(TasksLoaded(
           todoTasks: List.from(state.todoTasks),
           inProgressTasks: List.from(state.inProgressTasks),
-          doneTasks: List.from(state.doneTasks)
-      ));
+          doneTasks: List.from(state.doneTasks)));
     }
   }
 
@@ -54,15 +57,50 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     final state = this.state;
 
     if (state is TasksLoaded) {
-      if (event.task.progress == Progress.TODO) state.todoTasks.remove(event.task);
-      else if (event.task.progress == Progress.IN_PROGRESS) state.inProgressTasks.remove(event.task);
-      else if (event.task.progress == Progress.DONE) state.doneTasks.remove(event.task);
+      if (event.task.progress == Progress.TODO)
+        state.todoTasks.remove(event.task);
+      else if (event.task.progress == Progress.IN_PROGRESS)
+        state.inProgressTasks.remove(event.task);
+      else if (event.task.progress == Progress.DONE)
+        state.doneTasks.remove(event.task);
 
       emit(TasksLoaded(
           todoTasks: List.from(state.todoTasks),
           inProgressTasks: List.from(state.inProgressTasks),
-          doneTasks: List.from(state.doneTasks)
-      ));
+          doneTasks: List.from(state.doneTasks)));
+    }
+  }
+
+  void _MoveTaskToTodo(MoveTaskToTodo event, Emitter<TaskState> emit) {
+    final state = this.state;
+
+    if (state is TasksLoaded) {
+      emit(TasksLoaded(
+          todoTasks: List.from(state.todoTasks..add(event.task..progress = Progress.TODO)),
+          inProgressTasks: List.from(state.inProgressTasks..remove(event.task)),
+          doneTasks: List.from(state.doneTasks)));
+    }
+  }
+
+  void _MoveTaskToInProgress(MoveTaskToInProgress event, Emitter<TaskState> emit) {
+    final state = this.state;
+
+    if (state is TasksLoaded) {
+      emit(TasksLoaded(
+          todoTasks: List.from(state.todoTasks..remove(event.task)),
+          inProgressTasks: List.from(state.inProgressTasks..add(event.task..progress = Progress.IN_PROGRESS)),
+          doneTasks: List.from(state.doneTasks)));
+    }
+  }
+
+  void _MoveTaskToDone(MoveTaskToDone event, Emitter<TaskState> emit) {
+    final state = this.state;
+
+    if (state is TasksLoaded) {
+      emit(TasksLoaded(
+          todoTasks: List.from(state.todoTasks),
+          inProgressTasks: List.from(state.inProgressTasks..remove(event.task)),
+          doneTasks: List.from(state.doneTasks)..add(event.task..progress = Progress.DONE)));
     }
   }
 
