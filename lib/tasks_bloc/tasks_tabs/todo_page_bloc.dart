@@ -23,9 +23,9 @@ class _TodoPageBlocState extends State<TodoPageBloc> {
     setState(() {
       switch (type) {
         case CallbackFunctionType.RIGHT:
-          // todo tabsController.moveTaskToInProgress(task);
+        // todo tabsController.moveTaskToInProgress(task);
         case CallbackFunctionType.DELETE:
-        context.read<TaskBloc>().add(DeleteTask(task: task));
+          context.read<TaskBloc>().add(DeleteTask(task: task));
         case CallbackFunctionType.EDIT:
           OpenEditTaskPage(context, task);
         default:
@@ -35,7 +35,8 @@ class _TodoPageBlocState extends State<TodoPageBloc> {
   }
 
   Future<void> OpenAddTaskPage(BuildContext context) async {
-    Task taskToAdd = await Navigator.push(context, MaterialPageRoute(builder: (context) => AddTaskPage()));
+    Task taskToAdd = await Navigator.push(
+        context, MaterialPageRoute(builder: (context) => AddTaskPage()));
     if (!mounted) return;
 
     context.read<TaskBloc>().add(AddTask(task: taskToAdd));
@@ -53,7 +54,6 @@ class _TodoPageBlocState extends State<TodoPageBloc> {
     setState(() => tabsController.editTask(editedTask));
   }
 
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TaskBloc, TaskState>(
@@ -64,7 +64,8 @@ class _TodoPageBlocState extends State<TodoPageBloc> {
               children: state.todoTasks
                   .map((task) => TaskItem(
                       task: task,
-                      onButtonPressed: (CallbackFunctionType type, Task task) => onTaskItemButtonPressed(type, task)))
+                      onButtonPressed: (CallbackFunctionType type, Task task) =>
+                          onTaskItemButtonPressed(type, task)))
                   .toList(),
             ),
             floatingActionButton: FloatingActionButton(
@@ -76,8 +77,10 @@ class _TodoPageBlocState extends State<TodoPageBloc> {
               },
             ),
           );
-        else if (state is TasksLoading) return CircularProgressIndicator();
-        else return Text("Error while loading");
+        else if (state is TasksLoading)
+          return CircularProgressIndicator();
+        else
+          return Text("Error while loading");
       },
     );
   }

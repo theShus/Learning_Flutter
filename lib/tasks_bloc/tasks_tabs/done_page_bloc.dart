@@ -6,35 +6,37 @@ import '../../../tasks_mvc/tabs_controller.dart';
 import '../../../tasks_mvc/tabs_controller_interface.dart';
 import '../../pages/tasks/edit_task_page.dart';
 import '../components/task_bloc.dart';
+import '../components/task_event.dart';
 import '../components/task_state.dart';
 
-class DonePageBloc extends StatefulWidget{
-
+class DonePageBloc extends StatefulWidget {
   @override
   State<DonePageBloc> createState() => _DonePageBlocState();
 }
 
 class _DonePageBlocState extends State<DonePageBloc> {
-
   final TabsControllerInterface tabsController = TabsController();
 
   void onTaskItemButtonPressed(CallbackFunctionType type, Task task) {
     setState(() {
-      switch (type){
-        case CallbackFunctionType.DELETE: //todo tabsController.deleteTask(task);
-        case CallbackFunctionType.EDIT: OpenEditTaskPage(context, task);
-        default: print("Error occurred");
+      switch (type) {
+        case CallbackFunctionType.DELETE:
+          context.read<TaskBloc>().add(DeleteTask(task: task));
+        case CallbackFunctionType.EDIT:
+          OpenEditTaskPage(context, task);
+        default:
+          print("Error occurred");
       }
     });
   }
 
   Future<void> OpenEditTaskPage(BuildContext context, Task task) async {
-    Task editedTask = await Navigator.push(context, MaterialPageRoute(builder: (context) => EditTaskPage(task: task)));
+    Task editedTask = await Navigator.push(context,
+        MaterialPageRoute(builder: (context) => EditTaskPage(task: task)));
     if (!mounted) return;
     editedTask.progress = Progress.DONE;
     setState(() => tabsController.editTask(editedTask));
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -45,13 +47,16 @@ class _DonePageBlocState extends State<DonePageBloc> {
             body: ListView(
               children: state.doneTasks
                   .map((task) => TaskItem(
-                  task: task,
-                  onButtonPressed: (CallbackFunctionType type, Task task) => onTaskItemButtonPressed(type, task)))
+                      task: task,
+                      onButtonPressed: (CallbackFunctionType type, Task task) =>
+                          onTaskItemButtonPressed(type, task)))
                   .toList(),
             ),
           );
-        else if (state is TasksLoading) return CircularProgressIndicator();
-        else return Text("Error while loading");
+        else if (state is TasksLoading)
+          return CircularProgressIndicator();
+        else
+          return Text("Error while loading");
       },
     );
   }
