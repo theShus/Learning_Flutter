@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:learning_demo/tasks_bloc/task_bloc.dart';
-import 'package:learning_demo/tasks_bloc/task_event.dart';
+import 'package:learning_demo/tasks_bloc/components/task_bloc.dart';
 import 'package:learning_demo/tasks_bloc/tasks_tabs/done_page_bloc.dart';
 import 'package:learning_demo/tasks_bloc/tasks_tabs/in_progress_page_bloc.dart';
 import 'package:learning_demo/tasks_bloc/tasks_tabs/todo_page_bloc.dart';
 
 import '../../models/task.dart';
+import '../../tasks_bloc/components/task_event.dart';
 
 class TasksWithBlocPage extends StatelessWidget {
 
@@ -32,8 +32,7 @@ class TasksWithBlocPage extends StatelessWidget {
         providers: [
           BlocProvider(
               create: (context) => TaskBloc()
-                ..add(
-                  LoadTasks(todoTasks: todoTestingTasks, inProgressTasks: progressTestingTasks, doneTasks: doneTestingTasks)
+                ..add(LoadTasks(todoTasks: todoTestingTasks, inProgressTasks: progressTestingTasks, doneTasks: doneTestingTasks)
               )
           ),
         ],

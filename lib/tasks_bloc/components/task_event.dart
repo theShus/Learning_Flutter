@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
-
-import '../models/task.dart';
+import '../../models/task.dart';
 
 class TaskEvent extends Equatable {
   const TaskEvent();

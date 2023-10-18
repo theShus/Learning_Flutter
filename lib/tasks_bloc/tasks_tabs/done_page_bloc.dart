@@ -5,8 +5,8 @@ import '../../../recycler_items/task_item.dart';
 import '../../../tasks_mvc/tabs_controller.dart';
 import '../../../tasks_mvc/tabs_controller_interface.dart';
 import '../../pages/tasks/edit_task_page.dart';
-import '../task_bloc.dart';
-import '../task_state.dart';
+import '../components/task_bloc.dart';
+import '../components/task_state.dart';
 
 class DonePageBloc extends StatefulWidget{
 
@@ -21,7 +21,7 @@ class _DonePageBlocState extends State<DonePageBloc> {
   void onTaskItemButtonPressed(CallbackFunctionType type, Task task) {
     setState(() {
       switch (type){
-        case CallbackFunctionType.DELETE: tabsController.deleteTask(task);
+        case CallbackFunctionType.DELETE: //todo tabsController.deleteTask(task);
         case CallbackFunctionType.EDIT: OpenEditTaskPage(context, task);
         default: print("Error occurred");
       }
@@ -50,10 +50,8 @@ class _DonePageBlocState extends State<DonePageBloc> {
                   .toList(),
             ),
           );
-        else if (state is TasksLoading)
-          return CircularProgressIndicator();
-        else
-          return Text("Error while loading");
+        else if (state is TasksLoading) return CircularProgressIndicator();
+        else return Text("Error while loading");
       },
     );
   }

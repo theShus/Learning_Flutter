@@ -4,10 +4,12 @@ import 'package:learning_demo/models/task.dart';
 import 'package:learning_demo/pages/tasks/add_task_page.dart';
 import 'package:learning_demo/pages/tasks/edit_task_page.dart';
 import 'package:learning_demo/recycler_items/task_item.dart';
-import 'package:learning_demo/tasks_bloc/task_bloc.dart';
-import 'package:learning_demo/tasks_bloc/task_state.dart';
+import 'package:learning_demo/tasks_bloc/components/task_bloc.dart';
+import 'package:learning_demo/tasks_bloc/components/task_event.dart';
 import 'package:learning_demo/tasks_mvc/tabs_controller.dart';
 import 'package:learning_demo/tasks_mvc/tabs_controller_interface.dart';
+
+import '../components/task_state.dart';
 
 class TodoPageBloc extends StatefulWidget {
   @override
@@ -21,9 +23,9 @@ class _TodoPageBlocState extends State<TodoPageBloc> {
     setState(() {
       switch (type) {
         case CallbackFunctionType.RIGHT:
-          tabsController.moveTaskToInProgress(task);
+          // todo tabsController.moveTaskToInProgress(task);
         case CallbackFunctionType.DELETE:
-          tabsController.deleteTask(task);
+        context.read<TaskBloc>().add(DeleteTask(task: task));
         case CallbackFunctionType.EDIT:
           OpenEditTaskPage(context, task);
         default:
@@ -33,14 +35,10 @@ class _TodoPageBlocState extends State<TodoPageBloc> {
   }
 
   Future<void> OpenAddTaskPage(BuildContext context) async {
-    // Navigator.push returns a Future that completes after calling
-    // Navigator.pop on the Selection Screen.
-    Task taskToAdd = await Navigator.push(
-        context, MaterialPageRoute(builder: (context) => AddTaskPage()));
-    if (!mounted)
-      return; //OVO NAS STITI AKO SE STRANICA ZATVORI, DA NE VRATI NULL
+    Task taskToAdd = await Navigator.push(context, MaterialPageRoute(builder: (context) => AddTaskPage()));
+    if (!mounted) return;
 
-    setState(() => tabsController.createTask(taskToAdd));
+    context.read<TaskBloc>().add(AddTask(task: taskToAdd));
 
     ScaffoldMessenger.of(context)
       ..removeCurrentSnackBar()
@@ -78,8 +76,7 @@ class _TodoPageBlocState extends State<TodoPageBloc> {
               },
             ),
           );
-        else if (state is TasksLoading)
-          return CircularProgressIndicator();
+        else if (state is TasksLoading) return CircularProgressIndicator();
         else return Text("Error while loading");
       },
     );
